@@ -3,6 +3,8 @@
  * Author: Ingrid Canola, 
  * Main Program
  * Date: 2023-07-16
+ * Modified by: Md Anwarul Kabir
+ * Date of Modification: July 19, 2023
  */
 
 import java.util.Scanner;
@@ -12,8 +14,10 @@ public class BrainGame {
     public static int die = 0;
 
     public static void main(String[] args) {
-        
-        rollDie ar1 = new rollDie();
+        RunGame();
+    }
+    public static void RunGame(){
+        Die ar1 = new Die();
         ValidationsGame ar2 = new ValidationsGame(10);
 
         char letter;

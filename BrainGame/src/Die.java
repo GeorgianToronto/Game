@@ -3,11 +3,11 @@
  * by:  
  */
 
-public class rollDie {
+public class Die {
 
     private int outcome;
 
-    public rollDie(){
+    public Die(){
     }
     
     public int getDieNumber(){
