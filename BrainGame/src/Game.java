@@ -21,8 +21,6 @@ public class Game {
     Die newDie = new Die();
     //Declaring a String variable to store user answer
     String userAnswer;
-
-    ValidationsGame ar2 = new ValidationsGame(10);
     char letter;
     
     public void Run(){        
@@ -120,14 +118,17 @@ public class Game {
             else if(die==3){
                 System.out.println("Well! " + newPlayer.getName() + " use your math skills to win the game.\n");
                 //Start Math quiz
+                startIqQuiz();
             }
             else if(die==4){
                 System.out.println("Well! " + newPlayer.getName() + " use your riddle skills to win the game.\n");
                 //Start riddle quiz
+                startIqQuiz();
             }
             else if(die==5){
                 System.out.println("Well! " + newPlayer.getName() + " use your IQ skills to win the game.\n");
-                //Start Math quiz
+                //Start IQ quiz
+                startIqQuiz();
             }
             else if(die==6){
                 System.out.println("Oh! " + newPlayer.getName() + " just try again.\n");
@@ -137,10 +138,45 @@ public class Game {
         }
 
         else if(newPlayer.getScore()==50){
-            System.out.println("Congratulations " + newPlayer.getName() + "! " + newPlayer.getCountry() + " is proud of you");
-            userMessage.print("scr", newPlayer.getName(), newPlayer.getScore(), newPlayer.getSpentTime());
+             System.out.println("Congratulations " + newPlayer.getName() + "! " + newPlayer.getCountry() + " is proud of you!\n");
+                userMessage.print("scr", newPlayer.getName(), newPlayer.getScore(), newPlayer.getSpentTime());
+                userMessage.print("thx");
         }
     }
-        
+    public void startIqQuiz(){
+        Scanner userInput=new Scanner(System.in);
+        //Two dimentional array
+        String[][] quiz={
+            {"How many continents are there on Earth?","\n A. 20  \n B. 7  \n C. 100 \n", "B"},
+            {"Who was the first man on the moon?","\n A. Lance Armstrong  \n B. Ainstein  \n C. Neil Armstrong \n", "C"},
+            {"How many continents are there on Earth?","\n A. 20  \n B. 7  \n C. Over 100 \n", "B"},
+            {"Some months have 31 days. Some have 30. How many have 28?","\n A. 1  \n B. 12  \n C. 11 \n","B"},
+            {"Canoe is to ocean liner as glider is to","\n A. Kite  \n B. Balloon  \n C. Airplane \n","C"},
+        };
+        //One dimentional array
+        String [] answer=new String[5];
+
+        System.out.println();
+        System.out.println("Here you go for the IQ test!\n");
+        for(int i=0;i<quiz.length;i++){
+            System.out.println( i+1 + ". " + quiz[i][0] + " " +quiz[i][1]);
+            answer[i]=String.valueOf(userInput.next().charAt(0));
+            if(quiz[i][2].equals(answer[i].toUpperCase())){
+                System.out.println("\n Correct Answer! 10 points added.\n");
+                newPlayer.updateScore(10);
+            }
+            else{
+                System.out.println("\n Incorrect, 10 points lost!. The correct answer is " + quiz[i][2] + "\n");
+                newPlayer.updateScore(-10);
+            }
+            if(newPlayer.getScore()==50){
+                System.out.println("Congratulations " + newPlayer.getName() + "! " + newPlayer.getCountry() + " is proud of you!\n");
+                userMessage.print("scr", newPlayer.getName(), newPlayer.getScore(), newPlayer.getSpentTime());
+                userMessage.print("thx");
+                System.exit(0);
+            }
+        }
+        userInput.close();
+    }
 }
 

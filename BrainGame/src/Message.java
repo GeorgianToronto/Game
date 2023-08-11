@@ -104,7 +104,7 @@ public class Message {
     public void prinDieFacet(int die){
         System.out.println("Your number is");
         System.out.println("       ----");
-        System.out.printf("DIE--> |  %d  |", die);
+        System.out.printf("DIE->|  %d  |", die);
         System.out.println("");
         System.out.println("       ----");
         System.out.println();

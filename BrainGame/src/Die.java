@@ -5,6 +5,7 @@
  * Modified by: Md Anwarul Kabir
  * Date of Modification: Aug 09, 2023
  */
+import java.lang.Math;
 public class Die {
     //Defining roll method to get an random number between 1 to 6
     public int roll(){
