@@ -1,19 +1,15 @@
 /*
- * purpose:  
- * by:  
+ * Purpose: Defining a die class to get a random number between 1 to 6
+ * Author: Ingrid Canola
+ * Date: 2023-07-16
+ * Modified by: Md Anwarul Kabir
+ * Date of Modification: Aug 09, 2023
  */
-
 public class Die {
+    //Defining roll method to get an random number between 1 to 6
+    public int roll(){
+        return (int)(Math.random()*6 + 1);
 
-    private int outcome;
-
-    public Die(){
-    }
-    
-    public int getDieNumber(){
-        outcome = (int)(Math.random()*6 + 1);
-
-        return outcome;
     }
 
 }
