@@ -19,6 +19,8 @@ public class Game {
     InputStream userInputStream=System.in;
     //Creating Die object with default constructor
     Die newDie = new Die();
+    //Creating StopWatch object
+    StopWatch newStopWatch=new StopWatch();
     //Declaring a String variable to store user answer
     String userAnswer;
     char letter;
@@ -160,15 +162,23 @@ public class Game {
         System.out.println("Here you go for the IQ test!\n");
         for(int i=0;i<quiz.length;i++){
             System.out.println( i+1 + ". " + quiz[i][0] + " " +quiz[i][1]);
-            answer[i]=String.valueOf(userInput.next().charAt(0));
-            if(quiz[i][2].equals(answer[i].toUpperCase())){
-                System.out.println("\n Correct Answer! 10 points added.\n");
-                newPlayer.updateScore(10);
+            newStopWatch.runWithBeeps();
+            if(newStopWatch.isRunning()==true){
+                answer[i]=String.valueOf(userInput.next().charAt(0));
+                if(quiz[i][2].equals(answer[i].toUpperCase())){
+                    System.out.println("\n Correct Answer! 10 points added.\n");
+                    newPlayer.updateScore(10);
+                    newPlayer.updateTime(newStopWatch.getElapsedTime());
+                }
+                else{
+                    System.out.println("\n Incorrect, 10 points lost!. The correct answer is " + quiz[i][2] + "\n");
+                    newPlayer.updateScore(-10);
+                }
             }
             else{
-                System.out.println("\n Incorrect, 10 points lost!. The correct answer is " + quiz[i][2] + "\n");
-                newPlayer.updateScore(-10);
+                System.out.println("Timeout!");
             }
+            
             if(newPlayer.getScore()==50){
                 System.out.println("Congratulations " + newPlayer.getName() + "! " + newPlayer.getCountry() + " is proud of you!\n");
                 userMessage.print("scr", newPlayer.getName(), newPlayer.getScore(), newPlayer.getSpentTime());

@@ -58,4 +58,7 @@ public class Player {
     public void updateScore(int score){
         this.score=this.score+score;
     }
+    public void updateTime(long time){
+        this.spentTime=spentTime+time;
+    }
 }
