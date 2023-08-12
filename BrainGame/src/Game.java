@@ -49,7 +49,7 @@ public class Game {
         System.out.println("Are you interested to play this game (y/n)?");
         
         userAnswer=userInput.nextLine();
-        if(userAnswer.equals("y")){
+        if(userAnswer.equalsIgnoreCase("y")){
             //Calling setPlayerInfo method to collect user information
             setPlayerInfo();
             //Calling print method (method overloading) of the Message class to print greetings to player
@@ -59,10 +59,14 @@ public class Game {
             //Calling startGame method to start game playing
             startGame();
         }
-        else if(userAnswer.equals("n")){
+        else if(userAnswer.equalsIgnoreCase("n")){
             System.out.println("Ok, see you next time. Bye!");
-            System.exit(0); 
+            System.exit(0);
         }      
+        else{
+            System.out.println("Invaild input");
+            System.out.println("****Game Ended****");
+        }
     }
 
     public void setPlayerInfo(){
@@ -78,12 +82,6 @@ public class Game {
         System.out.println(userMessage.print("opt"));
         getDieOutput();
         gameFlow(newPlayer.getDieNumber());
-        
-            //ar2.validateLaunch(6);
-            
-            //System.out.println("HELLO " + newPlayer.getName() + "  YOUR SCORE IS "+ newPlayer.getScore() + " POINTS");
-            
-            //userInput.nextLine();
     }
 
     public void getDieOutput(){
@@ -118,17 +116,17 @@ public class Game {
                 gameFlow(newPlayer.getDieNumber());
             }
             else if(die==3){
-                System.out.println("Well! " + newPlayer.getName() + " use your math skills to win the game.\n");
+                System.out.println( newPlayer.getName() + ", use your math skills to win the game.\n");
                 //Start Math quiz
-                startIqQuiz();
+                startMathQuiz();
             }
             else if(die==4){
-                System.out.println("Well! " + newPlayer.getName() + " use your riddle skills to win the game.\n");
+                System.out.println(newPlayer.getName() + ", use your riddle skills to win the game.\n");
                 //Start riddle quiz
-                startIqQuiz();
+                startRiddleQuiz();
             }
             else if(die==5){
-                System.out.println("Well! " + newPlayer.getName() + " use your IQ skills to win the game.\n");
+                System.out.println(newPlayer.getName() + ", use your IQ skills to win the game.\n");
                 //Start IQ quiz
                 startIqQuiz();
             }
@@ -138,13 +136,15 @@ public class Game {
                 gameFlow(newPlayer.getDieNumber());
             }
         }
-
-        else if(newPlayer.getScore()==50){
-             System.out.println("Congratulations " + newPlayer.getName() + "! " + newPlayer.getCountry() + " is proud of you!\n");
-                userMessage.print("scr", newPlayer.getName(), newPlayer.getScore(), newPlayer.getSpentTime());
-                userMessage.print("thx");
+        else{
+            System.out.println("Congratulations " + newPlayer.getName() + "! you have won the game!!\n You are a pround of " + newPlayer.getCountry() + "!\n");
+            System.out.println(userMessage.print("scr", newPlayer.getName(), newPlayer.getScore(), newPlayer.getSpentTime()));
+            userMessage.print("thx");
+            System.exit(0);
+            System.out.println(Message.endGameMessage());
         }
     }
+    //IQ quiz methos
     public void startIqQuiz(){
         Scanner userInput=new Scanner(System.in);
         //Two dimentional array
@@ -161,32 +161,107 @@ public class Game {
         System.out.println();
         System.out.println("Here you go for the IQ test!\n");
         for(int i=0;i<quiz.length;i++){
+
             System.out.println( i+1 + ". " + quiz[i][0] + " " +quiz[i][1]);
-            newStopWatch.runWithBeeps();
-            if(newStopWatch.isRunning()==true){
-                answer[i]=String.valueOf(userInput.next().charAt(0));
-                if(quiz[i][2].equals(answer[i].toUpperCase())){
-                    System.out.println("\n Correct Answer! 10 points added.\n");
-                    newPlayer.updateScore(10);
-                    newPlayer.updateTime(newStopWatch.getElapsedTime());
-                }
-                else{
-                    System.out.println("\n Incorrect, 10 points lost!. The correct answer is " + quiz[i][2] + "\n");
-                    newPlayer.updateScore(-10);
-                }
+            answer[i]=String.valueOf(userInput.next().charAt(0));
+            if(quiz[i][2].equals(answer[i].toUpperCase())){
+                newPlayer.updateScore(10);
+                System.out.println("\n Correct Answer! 10 points added. Current Score= " + newPlayer.getScore() +"\n");
             }
             else{
-                System.out.println("Timeout!");
-            }
-            
-            if(newPlayer.getScore()==50){
-                System.out.println("Congratulations " + newPlayer.getName() + "! " + newPlayer.getCountry() + " is proud of you!\n");
-                userMessage.print("scr", newPlayer.getName(), newPlayer.getScore(), newPlayer.getSpentTime());
-                userMessage.print("thx");
-                System.exit(0);
+                newPlayer.updateScore(-10);
+                System.out.println("\n Incorrect, 10 points lost!. The correct answer is " + quiz[i][2] + " Current Score= " + newPlayer.getScore() +"\n");
             }
         }
+        checkScore();
         userInput.close();
+        System.out.println(Message.endGameMessage());
+        System.exit(0);
+    }
+    public void checkScore(){
+        if(newPlayer.getScore()==50){
+            System.out.println("Congratulations " + newPlayer.getName() + "! you have won the game!!\n You are a pround of " + newPlayer.getCountry() + "!\n");
+            System.out.println(userMessage.print("scr", newPlayer.getName(), newPlayer.getScore(), newPlayer.getSpentTime()));
+            userMessage.print("thx");
+        }
+        else if(newPlayer.getScore()>=50){
+            System.out.println("Wow " + newPlayer.getName() + "! you have won the game with bonus points!!\n You are a pround of " + newPlayer.getCountry() + "!\n");
+            System.out.println(userMessage.print("scr", newPlayer.getName(), newPlayer.getScore(), newPlayer.getSpentTime()));
+            userMessage.print("thx");
+        }
+        else if(newPlayer.getScore()<50){
+            System.out.println("Sorry " + newPlayer.getName() + "! you have lost the game!!\n Try again later\n");
+            System.out.println(userMessage.print("scr", newPlayer.getName(), newPlayer.getScore(), newPlayer.getSpentTime()));
+            userMessage.print("thx");
+        }
+    }
+    //Math quiz methos
+    public void startMathQuiz(){
+        Scanner userInput=new Scanner(System.in);
+        //Two dimentional array
+        String[][] quiz={
+            {"What is the sum of 12 + 78?","\n A. 50  \n B. 60  \n C. 90 \n", "C"},
+            {"What is the BODMAS of 15-13(12*1/2)?","\n A. 12  \n B. 13  \n C. 10 \n", "A"},
+            {"What is the square root of 5 using Babylonian method?","\n A. 2.236068  \n B. 2.6512  \n C. 2.45445 \n", "A"},
+            {"What is the area of the triangle with first side 7, second side 15, third side 20?","\n A. 35  \n B. 42  \n C. 40 \n","B"},
+            {"What is the Fibonacci sequence for the 6th term?","\n A. 45  \n B. 10  \n C. 3 \n","C"},
+        };
+        //One dimentional array
+        String [] answer=new String[5];
+
+        System.out.println();
+        System.out.println("Here you go for the Math test!\n");
+        for(int i=0;i<quiz.length;i++){
+
+            System.out.println( i+1 + ". " + quiz[i][0] + " " +quiz[i][1]);
+            answer[i]=String.valueOf(userInput.next().charAt(0));
+            if(quiz[i][2].equals(answer[i].toUpperCase())){
+                newPlayer.updateScore(10);
+                System.out.println("\n Correct Answer! 10 points added. Current Score= " + newPlayer.getScore() +"\n");
+            }
+            else{
+                newPlayer.updateScore(-10);
+                System.out.println("\n Incorrect, 10 points lost!. The correct answer is " + quiz[i][2] + " Current Score= " + newPlayer.getScore() +"\n");
+            }
+        }
+        checkScore();
+        userInput.close();
+        System.out.println(Message.endGameMessage());
+        System.exit(0);
+    }
+    //Riddle quiz methos
+    public void startRiddleQuiz(){
+        Scanner userInput=new Scanner(System.in);
+        //Two dimentional array
+        String[][] quiz={
+            {"The more you code, the more of me there is. I may be gone for now but you can\u2019t get rid of me forever. What am I?","\n A. 50  \n B. 60  \n C. 90 \n", "C"},
+            {"As a developer I\u2019m your eyes, showing you the result of your code in your language of choice. What am I?","\n A. 12  \n B. 13  \n C. 10 \n", "A"},
+            {"I take what I\u2019m given, do some magic, and give you back something you expect. There are many different versions of me and we originated from math. I ensure your code is clean and reusable. What am I?","\n A. 2.236068  \n B. 2.6512  \n C. 2.45445 \n", "A"},
+            {"I am a programming construct that allows you to repeat a block of code until a certain condition is no longer true. What am I?","\n A. 35  \n B. 42  \n C. 40 \n","B"},
+            {"I am a program that takes your code, analyses it, and translates it into a format that the computer understands. Without me, your code would be just plain text. What am I?","\n A. 45  \n B. 10  \n C. 3 \n","C"},
+        };
+        //One dimentional array
+        String [] answer=new String[5];
+
+        System.out.println();
+        System.out.println("Here you go for the Math test!\n");
+        for(int i=0;i<quiz.length;i++){
+
+            System.out.println( i+1 + ". " + quiz[i][0] + " " +quiz[i][1]);
+            answer[i]=String.valueOf(userInput.next().charAt(0));
+            if(quiz[i][2].equals(answer[i].toUpperCase())){
+                newPlayer.updateScore(10);
+                System.out.println("\n Correct Answer! 10 points added. Current Score= " + newPlayer.getScore() +"\n");
+            }
+            else{
+                newPlayer.updateScore(-10);
+                System.out.println("\n Incorrect, 10 points lost!. The correct answer is " + quiz[i][2] + " Current Score= " + newPlayer.getScore() +"\n");
+            }
+        }
+        checkScore();
+        userInput.close();
+        System.out.println(Message.endGameMessage());
+        System.exit(0);
     }
 }
 

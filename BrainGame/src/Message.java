@@ -74,32 +74,16 @@ public class Message {
         else if(msgType=="scr"){
             greetScore="Player Name: " + playerName +"\n";
             greetScore=greetScore+"Current score: " + score +"\n";
-            greetScore=greetScore+"Time spent: " + time/1000 +" seconds\n";
+            //greetScore=greetScore+"Time spent: " + time/1000 +" seconds\n";
         }
         return greetScore;
     }
-    /*public String print(int die){
-        String greetOption="";
-        if(die==1){
-            greetScore="Congratulations " + new + ", you have got 10 points as your bonus score!";
-        }
-        else if(die==2){
-            greetScore="Player Name: " + playerName +"\n";
-        }
-        else if(die==3){
-            greetScore="Player Name: " + playerName +"\n";
-        }
-        else if(die==4){
-            greetScore="Player Name: " + playerName +"\n";
-        }
-        else if(die==5){
-            greetScore="Player Name: " + playerName +"\n";
-        }
-        else if(die==6){
-            greetScore="Player Name: " + playerName +"\n";
-        }
-        return greetOption;
-    }*/
+    public static String endGameMessage(){
+        String egm="****************************\n";
+        egm=egm+"**********Game End**********\n";
+        egm=egm+"***************************\n";
+        return egm;
+    }
 
     public void prinDieFacet(int die){
         System.out.println("Your number is");
