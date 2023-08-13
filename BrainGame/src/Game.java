@@ -42,9 +42,16 @@ public class Game {
         catch(Exception e){
             e.printStackTrace();
         }
-        userInput.nextLine();
+        try{
+            if(userInputStream.available()!=0){
+                userInput.nextLine();
+                System.out.println("Introduction skipped!");
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
         System.out.println();
-        System.out.println("Introduction skipped!");
         System.out.println();
         System.out.println("Are you interested to play this game (y/n)?");
         
@@ -234,11 +241,11 @@ public class Game {
         Scanner userInput=new Scanner(System.in);
         //Two dimentional array
         String[][] quiz={
-            {"The more you code, the more of me there is. I may be gone for now but you can\u2019t get rid of me forever. What am I?","\n A. 50  \n B. 60  \n C. 90 \n", "C"},
-            {"As a developer I\u2019m your eyes, showing you the result of your code in your language of choice. What am I?","\n A. 12  \n B. 13  \n C. 10 \n", "A"},
-            {"I take what I\u2019m given, do some magic, and give you back something you expect. There are many different versions of me and we originated from math. I ensure your code is clean and reusable. What am I?","\n A. 2.236068  \n B. 2.6512  \n C. 2.45445 \n", "A"},
-            {"I am a programming construct that allows you to repeat a block of code until a certain condition is no longer true. What am I?","\n A. 35  \n B. 42  \n C. 40 \n","B"},
-            {"I am a program that takes your code, analyses it, and translates it into a format that the computer understands. Without me, your code would be just plain text. What am I?","\n A. 45  \n B. 10  \n C. 3 \n","C"},
+            {"The more you code, the more of me there is. I may be gone for now but you can\u2019t get rid of me forever. What am I?","\n A. A bug  \n B. An insect  \n C. An error \n", "A"},
+            {"As a developer I\u2019m your eyes, showing you the result of your code in your language of choice. What am I?","\n A. Terminal  \n B. A print statement  \n C. An error message \n", "B"},
+            {"I take what I\u2019m given, do some magic, and give you back something you expect. There are many different versions of me and we originated from math. I ensure your code is clean and reusable. What am I?","\n A. A variable  \n B. A loop  \n C. A function \n", "C"},
+            {"I am a programming construct that allows you to repeat a block of code until a certain condition is no longer true. What am I?","\n A. A recursion  \n B. A loop  \n C. A iteration \n","B"},
+            {"I am a program that takes your code, analyses it, and translates it into a format that the computer understands. Without me, your code would be just plain text. What am I?","\n A. A translator  \n B. A compiler  \n C. An interpreter \n","B"},
         };
         //One dimentional array
         String [] answer=new String[5];

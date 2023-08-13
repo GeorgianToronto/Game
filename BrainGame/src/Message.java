@@ -44,7 +44,7 @@ public class Message {
                 gameIntro=gameIntro+"Each correct answer will add 10 points to your score, if you can score 50 then you win!\n";
                 gameIntro=gameIntro+"Another exciting part is that your time will be calculated to compare with other players.\n";
                 gameIntro=gameIntro+"So that you can know that who has completed the game by the lesser amount of time.\n";
-                gameIntro=gameIntro+"We hope that you have a clear idea about this game now, best of luck!\n\ny";
+                gameIntro=gameIntro+"We hope that you have a clear idea about this game now, best of luck!\n\n";
                 
                 return gameIntro;
             case "opt":
@@ -73,7 +73,7 @@ public class Message {
         }
         else if(msgType=="scr"){
             greetScore="Player Name: " + playerName +"\n";
-            greetScore=greetScore+"Current score: " + score +"\n";
+            greetScore=greetScore+"Total score: " + score +"\n";
             //greetScore=greetScore+"Time spent: " + time/1000 +" seconds\n";
         }
         return greetScore;
