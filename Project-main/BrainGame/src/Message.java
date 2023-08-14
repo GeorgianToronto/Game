@@ -54,7 +54,7 @@ public class Message {
                 gameIntro=gameIntro+"Mixed of luck, knowledge and intelligence has made this game excited!\n";
                 gameIntro=gameIntro+"You will have to start this game by throwing a die that is with your luck!\n";
                 gameIntro=gameIntro+"Based on that, you might have the chance of gaining or losing score, \n";
-                gameIntro=gameIntro+"without answering any questions of any category among Math, IQ and Riddle.\n";
+                gameIntro=gameIntro+"without answering any questions of any category among Math, IQ, and Riddle.\n";
                 gameIntro=gameIntro+"Or, you might have the chance of answering 5 questions from any of those categories.\n";
                 gameIntro=gameIntro+"Each correct answer will add 10 points to your score, if you can score 50 then you win!\n";
                 gameIntro=gameIntro+"Another exciting part is that your time will be calculated to compare with other players.\n";
